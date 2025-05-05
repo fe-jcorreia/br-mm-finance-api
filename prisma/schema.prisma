@@ -17,6 +17,7 @@ model User {
   id        String @id @default(uuid())
   firstName String
   lastName  String
+  phone     String
 
   projects UserProject[]
 
@@ -75,7 +76,7 @@ model Cashflow {
 
 model CashflowCategory {
   id   String @id @default(uuid())
-  name String
+  name String @unique
 
   Cashflow Cashflow[]
 
