@@ -6,7 +6,9 @@
   "license": "ISC",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch server.ts",
+    "migration:generate": "prisma migrate dev --name",
+    "migration:run": "prisma migrate dev",
+    "dev": "tsx watch src/server.ts",
     "start": "node server.js"
   },
   "dependencies": {
