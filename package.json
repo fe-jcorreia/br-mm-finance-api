@@ -6,10 +6,13 @@
   "license": "ISC",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch server.ts"
+    "migration:generate": "prisma migrate dev --name",
+    "migration:run": "prisma migrate dev",
+    "dev": "tsx watch src/server.ts",
+    "start": "node server.js"
   },
   "dependencies": {
+    "@prisma/client": "5.19.1",
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
     "express": "4.21.0",
@@ -26,8 +29,8 @@
     "vitest": "2.1.1"
   },
   "engines": {
-    "node": "20.x.x",
-    "npm": "10.8.3"
+    "node": "22.x.x",
+    "npm": "11.3.0"
   },
   "repository": {
     "type": "git",
