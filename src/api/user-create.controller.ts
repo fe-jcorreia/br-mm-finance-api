@@ -1,10 +1,10 @@
 import { UserCreateUseCase } from "@src/domain/user-create.usecase";
 import { Request, Response } from "express";
-import { Service } from "typedi";
+import { inject, injectable } from "tsyringe";
 
-@Service()
+@injectable()
 export class UserCreateController {
-  constructor(private readonly userCreateUseCase: UserCreateUseCase) {}
+  constructor(@inject("UserCreateUseCase") private readonly userCreateUseCase: UserCreateUseCase) {}
 
   async exec(req: Request, res: Response) {
     await this.userCreateUseCase.exec({});
