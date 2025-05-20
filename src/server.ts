@@ -1,14 +1,15 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import express from "express";
+import "./container-registry";
 import { Env } from "@src/env";
+
 import { authRoute } from "./api/auth.route";
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/auth", authRoute)
-
+app.use("/auth", authRoute);
 
 app.listen(Env.PORT, () => {
   console.log(`Server running on PORT ${Env.PORT}`);

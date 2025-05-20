@@ -1,16 +1,17 @@
 import { User } from "@prisma/client";
-import { prisma } from "@src/data/orm/prisma";
+import { UserRepository } from "@src/data/repository";
+import { UserCreationInput } from "@src/model";
+import { inject, injectable } from "tsyringe";
 
+@injectable()
 export class UserCreateUseCase {
-  async exec(input: any): Promise<User> {
-    const user = await prisma.user.create({
-      data: {
-        firstName: "Fernando",
-        lastName: "Correia 2",
-        phone: "+5511999991111",
-      },
-    });
+  constructor(
+    @inject("UserRepository") private readonly userRepository: UserRepository
+  ) {}
 
-    return user;
+  async exec(input: UserCreationInput): Promise<User> {
+    const insertedUser = await this.userRepository.insert(input)
+    
+    return insertedUser;
   }
 }
