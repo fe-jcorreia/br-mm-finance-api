@@ -4,12 +4,16 @@ import "./container-registry";
 import { Env } from "@src/env";
 
 import { authRoute } from "./api/auth.route";
+import { parseGlobalError } from "./core/error/error.middleware";
 
 const app = express();
 
 app.use(express.json());
 
 app.use("/auth", authRoute);
+
+
+app.use(parseGlobalError);
 
 app.listen(Env.PORT, () => {
   console.log(`Server running on PORT ${Env.PORT}`);
