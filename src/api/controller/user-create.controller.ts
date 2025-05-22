@@ -18,14 +18,11 @@ export class UserCreateController {
     private readonly userCreateUseCase: UserCreateUseCase
   ) {}
 
-  async handle(
-    req: Request,
-    res: Response
-  ) {
+  async handle(req: Request, res: Response) {
     const body = userCreationSchema.parse(req.body);
 
     const user = await this.userCreateUseCase.exec(body);
 
-    res.status(201).send({ message: "Created", user });
+    res.status(201).send({ user });
   }
 }
