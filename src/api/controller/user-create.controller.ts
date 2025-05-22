@@ -24,6 +24,6 @@ export class UserCreateController {
 
     const user = await this.userCreateUseCase.exec(body);
 
-    return res.status(201).send({ message: "Created", user });
+    res.status(201).send({ message: "Created", user });
   }
 }

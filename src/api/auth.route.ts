@@ -7,9 +7,7 @@ export const authRoute = express.Router();
 
 authRoute.post(
   "/create",
-  asyncErrorHandler((req: Request, res: Response) => {
-    return container.resolve(UserCreateController).handle(req, res);
-  })
+  asyncErrorHandler(container.resolve(UserCreateController).handle)
 );
 
 authRoute.get("/me", async (req: Request, res: Response) => {

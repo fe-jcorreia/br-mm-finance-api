@@ -17,7 +17,12 @@ export class BaseError<T = any> extends Error {
   code: string;
   details?: T;
 
-  constructor({ status = 500, code = 'GLB_01', message = 'global.error.generic', details }: BaseErrorFields) {
+  constructor({
+    status = 500,
+    code = "GLB_01",
+    message = "global.error.generic",
+    details,
+  }: BaseErrorFields) {
     super(message);
 
     this.status = status;

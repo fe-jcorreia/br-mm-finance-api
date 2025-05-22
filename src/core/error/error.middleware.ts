@@ -8,7 +8,12 @@ export interface ErrorBody {
   details?: any;
 }
 
-export function parseGlobalError(err: any, _req: Request, res: Response, next: NextFunction) {
+export function parseGlobalError(
+  err: any,
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const errors: ErrorBody[] = [];
   let status = 500;
 
@@ -31,8 +36,8 @@ export function parseGlobalError(err: any, _req: Request, res: Response, next: N
     );
   } else {
     errors.push({
-      code: 'GLB_01',
-      message: 'global.error.generic',
+      code: "GLB_01",
+      message: "global.error.generic",
       details: err.message,
     });
   }
