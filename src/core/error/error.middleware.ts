@@ -30,8 +30,8 @@ export function parseGlobalError(
     errors.push(
       ...err.errors.map((validation) => ({
         code: "VAL_01",
-        message: validation.message,
-        details: validation.message,
+        message: "validation.error.generic",
+        details: `Field ${validation.path?.[0]} - ${validation.message}`,
       }))
     );
   } else {
