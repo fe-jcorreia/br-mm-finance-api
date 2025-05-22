@@ -4,6 +4,8 @@ import { inject, injectable } from "tsyringe";
 import { z } from "zod";
 
 const userCreationSchema = z.object({
+  email: z.string(),
+  password: z.string(),
   firstName: z.string(),
   lastName: z.string(),
   phone: z.string(),

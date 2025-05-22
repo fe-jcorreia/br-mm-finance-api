@@ -1,6 +1,5 @@
-import { User } from "@prisma/client";
 import { UserRepository } from "@src/data/repository";
-import { UserCreationInput } from "@src/model";
+import { User, UserCreationInput } from "@src/model";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
