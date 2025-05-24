@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
+
 import { isBaseError } from "./base.error";
 
 export interface ErrorBody {

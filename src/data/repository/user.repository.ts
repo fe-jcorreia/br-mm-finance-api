@@ -1,14 +1,21 @@
+import { CryptoService } from "@core/security";
+import { ConflictError } from "@core/error";
+import { dbClient } from "@data/orm";
 import {
   User,
   UserCreationInput,
   UserUpdateInput,
   UserWithCredentials,
-} from "@src/model";
-import { dbClient } from "@src/data/orm/database-client";
-import { CryptoService } from "@src/core/security";
-import { ConflictError } from "@src/core/error";
+} from "@model";
 
 const UNIQUE_CONSTRAINT_ERROR = "P2002";
+const userSelection = {
+  id: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+  phone: true,
+};
 
 export class UserRepository {
   async insert(input: UserCreationInput): Promise<User> {
@@ -21,13 +28,7 @@ export class UserRepository {
     try {
       return await dbClient.user.create({
         data: { ...input, salt, password: hashedPassword },
-        select: {
-          id: true,
-          email: true,
-          firstName: true,
-          lastName: true,
-          phone: true,
-        },
+        select: userSelection,
       });
     } catch (error) {
       if (error.code === UNIQUE_CONSTRAINT_ERROR) {
@@ -41,8 +42,26 @@ export class UserRepository {
     }
   }
 
-  async update(input: UserUpdateInput): Promise<User> {
-    return {} as User;
+  async findOneByEmail(email: string): Promise<User | null> {
+    return await dbClient.user.findUnique({
+      where: { email, deletedAt: null },
+      select: userSelection,
+    });
+  }
+
+  async findOneById(id: string): Promise<User | null> {
+    return await dbClient.user.findUnique({
+      where: { id, deletedAt: null },
+      select: userSelection,
+    });
+  }
+
+  async update(id: string, input: UserUpdateInput): Promise<User> {
+    return dbClient.user.update({
+      where: { id },
+      data: input,
+      select: userSelection,
+    });
   }
 
   async remove(input: UserWithCredentials): Promise<User> {
@@ -64,6 +83,7 @@ export class UserRepository {
         password: null,
         deletedAt: new Date(),
       },
+      select: userSelection,
     });
   }
 }

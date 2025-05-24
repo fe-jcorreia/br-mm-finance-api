@@ -30,7 +30,18 @@
     "moduleResolution": "nodenext",                     /* Specify how TypeScript looks up a file from a given module specifier. */
     "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
-      "@src/*": ["./src/*"]
+      "@api/*": ["./src/api/*"],
+      "@api": ["./src/api"],
+      "@core/*": ["./src/core/*"],
+      "@core": ["./src/core"],
+      "@data/*": ["./src/data/*"],
+      "@data": ["./src/data"],
+      "@domain/*": ["./src/domain/*"],
+      "@domain": ["./src/domain"],
+      "@env/*": ["./src/env/*"],
+      "@env": ["./src/env"],
+      "@model/*": ["./src/model/*"],
+      "@model": ["./src/model"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

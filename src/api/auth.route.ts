@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
-import { UserCreateController } from "./controller/user-create.controller";
 import { container } from "tsyringe";
-import { asyncErrorHandler } from "@src/core/error/async-error-handler.middleware";
+
+import { UserCreateController } from "@api/controller";
+import { asyncErrorHandler } from "@core/error";
 
 export const authRoute = express.Router();
 

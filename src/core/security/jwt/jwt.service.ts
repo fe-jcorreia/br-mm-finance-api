@@ -1,5 +1,6 @@
-import { InternalServerError } from "@src/core/error";
 import jwt, { decode as decodeJwt } from "jsonwebtoken";
+
+import { InternalServerError } from "@core/error";
 
 export interface JwtToken<T> {
   data: T;

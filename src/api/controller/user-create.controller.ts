@@ -1,7 +1,8 @@
-import { UserCreateUseCase } from "@src/domain/user-create.usecase";
 import { Request, Response } from "express";
 import { inject, injectable } from "tsyringe";
 import { z } from "zod";
+
+import { UserCreateUseCase } from "@domain/user";
 
 const userCreationSchema = z.object({
   email: z.string(),
