@@ -3,7 +3,7 @@ import express from "express";
 import { Env } from "@env";
 import "./container-registry";
 
-import { authRoute } from "@api";
+import { userRoute } from "@api";
 import { parseGlobalError } from "@core/error/generic";
 import { CryptoService, JwtService } from "@core/security";
 
@@ -14,7 +14,7 @@ JwtService.configure({ expiration: Env.JWT_EXPIRATION, secret: Env.JWT_SECRET })
 
 app.use(express.json());
 
-app.use("/auth", authRoute);
+app.use("/user", userRoute);
 
 
 app.use(parseGlobalError);

@@ -4,15 +4,15 @@ import { container } from "tsyringe";
 import { UserCreateController } from "@api/controller/user";
 import { asyncErrorHandler } from "@core/error/generic";
 
-export const authRoute = express.Router();
+export const userRoute = express.Router();
 
-authRoute.post(
+userRoute.post(
   "/create",
   asyncErrorHandler((req: Request, res: Response) =>
     container.resolve(UserCreateController).handle(req, res)
   )
 );
 
-authRoute.get("/me", async (req: Request, res: Response) => {
+userRoute.get("/me", async (req: Request, res: Response) => {
   res.send({ message: "Selected" });
 });
