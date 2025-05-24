@@ -10,13 +10,6 @@ import {
 } from "@model";
 
 const UNIQUE_CONSTRAINT_ERROR = "P2002";
-const userSelection = {
-  id: true,
-  email: true,
-  firstName: true,
-  lastName: true,
-  phone: true,
-};
 
 export class UserRepository {
   async insert(input: UserCreationInput): Promise<User> {
@@ -29,7 +22,6 @@ export class UserRepository {
     try {
       return await dbClient.user.create({
         data: { ...input, salt, password: hashedPassword },
-        select: userSelection,
       });
     } catch (error) {
       if (error.code === UNIQUE_CONSTRAINT_ERROR) {
@@ -43,14 +35,12 @@ export class UserRepository {
   async findOneByEmail(email: string): Promise<User | null> {
     return await dbClient.user.findUnique({
       where: { email, deletedAt: null },
-      select: userSelection,
     });
   }
 
   async findOneById(id: string): Promise<User | null> {
     return await dbClient.user.findUnique({
       where: { id, deletedAt: null },
-      select: userSelection,
     });
   }
 
@@ -58,7 +48,6 @@ export class UserRepository {
     return dbClient.user.update({
       where: { id },
       data: input,
-      select: userSelection,
     });
   }
 
@@ -81,7 +70,6 @@ export class UserRepository {
         password: null,
         deletedAt: new Date(),
       },
-      select: userSelection,
     });
   }
 }

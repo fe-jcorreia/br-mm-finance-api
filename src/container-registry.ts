@@ -1,7 +1,7 @@
 import { container } from "tsyringe";
 
 import { UserCreateUseCase } from "@domain/user";
-import { UserCreateController } from "@api/controller";
+import { UserCreateController } from "@api/controller/user";
 import { UserRepository } from "@data/repository";
 
 

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
 
 import { isBaseError } from "./generic/base.error";
+import { GlobalErrors } from "./generic/global.error";
 
 export interface ErrorBody {
   code: string;
@@ -13,7 +14,7 @@ export function parseGlobalError(
   err: any,
   _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) {
   const errors: ErrorBody[] = [];
   let status = 500;
@@ -31,14 +32,14 @@ export function parseGlobalError(
     errors.push(
       ...err.errors.map((validation) => ({
         code: "VAL_01",
-        message: "validation.error.generic",
+        message: validation.message,
         details: `Field ${validation.path?.[0]} - ${validation.message}`,
       }))
     );
   } else {
     errors.push({
-      code: "GLB_01",
-      message: "global.error.generic",
+      code: GlobalErrors.Generic.code,
+      message: GlobalErrors.Generic.message,
       details: err.message,
     });
   }

@@ -1,16 +1,8 @@
 import { Request, Response } from "express";
 import { inject, injectable } from "tsyringe";
-import { z } from "zod";
 
 import { UserCreateUseCase } from "@domain/user";
-
-const userCreationSchema = z.object({
-  email: z.string(),
-  password: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  phone: z.string(),
-});
+import { userCreationSchema, userSchema } from "@api/schema";
 
 @injectable()
 export class UserCreateController {
@@ -24,6 +16,6 @@ export class UserCreateController {
 
     const user = await this.userCreateUseCase.exec(body);
 
-    res.status(201).send({ user });
+    res.status(201).send({ user: userSchema.parse(user) });
   }
 }
