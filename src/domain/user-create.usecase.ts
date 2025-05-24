@@ -9,8 +9,8 @@ export class UserCreateUseCase {
   ) {}
 
   async exec(input: UserCreationInput): Promise<User> {
-    const insertedUser = await this.userRepository.insert(input)
-    
+    const insertedUser = await this.userRepository.insert(input);
+
     return insertedUser;
   }
 }

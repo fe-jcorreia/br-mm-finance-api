@@ -1,7 +1,7 @@
 import { InternalServerError } from '@src/core/error';
 import * as crypto from 'node:crypto';
 
-const SCRYPT_COST = process.env.NODE_ENV === 'test' ? 2 : 16384;
+const SCRYPT_COST = process.env.NODE_ENV === 'development' ? 2 : 16384;
 
 let cryptoSalt: string;
 let defaultPasswordLength = 10;
@@ -20,6 +20,7 @@ function generateHash(value: string): Promise<string> {
       if (error) {
         reject(error);
       }
+
 
       resolve(response.toString('base64'));
     }),
@@ -45,7 +46,7 @@ function generateRandomPassword(): string {
   /*
     randomBytes method creates a password with the double size of our specified
     length: http://stackoverflow.com/a/27747377, because, actually, it sets the byte size, as it
-    is hex type, it creates 2 character for eash byte. That's why we divide defaultPasswordLength by 2.
+    is hex type, it creates 2 character for each byte. That's why we divide defaultPasswordLength by 2.
     Furthermore, we need to guard in case it's a odd number, also because hex type does not accept it.
     */
   if (defaultPasswordLength % 2) {

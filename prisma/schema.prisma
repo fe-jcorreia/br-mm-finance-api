@@ -17,7 +17,7 @@ model User {
   id         String    @unique @default(uuid()) @map("external_id")
   internalId Int       @id @default(autoincrement()) @map("id")
   email      String    @unique()
-  password   String
+  password   String?
   firstName  String
   lastName   String
   phone      String
