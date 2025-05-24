@@ -1,8 +1,8 @@
-import * as crypto from 'node:crypto';
+import * as crypto from "node:crypto";
 
-import { InternalServerError } from '@core/error/generic';
+import { InternalServerError } from "@core/error/generic";
 
-const SCRYPT_COST = process.env.NODE_ENV === 'development' ? 2 : 16384;
+const SCRYPT_COST = process.env.NODE_ENV === "development" ? 2 : 16384;
 
 let cryptoSalt: string;
 let defaultPasswordLength = 10;
@@ -13,18 +13,25 @@ function configure(salt: string) {
 
 function generateHash(value: string): Promise<string> {
   if (!cryptoSalt) {
-    throw new InternalServerError({ details: 'Crypto salt not configured. Call `configureCrypto`.' });
+    throw new InternalServerError({
+      details: "Crypto salt not configured. Call `configureCrypto`.",
+    });
   }
 
   return new Promise((resolve, reject) =>
-    crypto.scrypt(value, cryptoSalt, 64, { cost: SCRYPT_COST }, (error, response) => {
-      if (error) {
-        reject(error);
+    crypto.scrypt(
+      value,
+      cryptoSalt,
+      64,
+      { cost: SCRYPT_COST },
+      (error, response) => {
+        if (error) {
+          reject(error);
+        }
+
+        resolve(response.toString("base64"));
       }
-
-
-      resolve(response.toString('base64'));
-    }),
+    )
   );
 }
 
@@ -32,11 +39,13 @@ function generateHash(value: string): Promise<string> {
 // for more info: https://www.youtube.com/watch?v=8ZtInClXe1Q
 function generateHashWithSalt(value: string, salt: string): Promise<string> {
   if (!salt) {
-    throw Error('Invalid salt');
+    throw Error("Invalid salt");
   }
 
   if (!cryptoSalt) {
-    throw new InternalServerError({ details: 'Crypto salt not configured. Call `configureCrypto`.' });
+    throw new InternalServerError({
+      details: "Crypto salt not configured. Call `configureCrypto`.",
+    });
   }
 
   const passwordWithSalt = value + salt;
@@ -54,10 +63,10 @@ function generateRandomPassword(): string {
     defaultPasswordLength++;
     return crypto
       .randomBytes(defaultPasswordLength / 2)
-      .toString('hex')
+      .toString("hex")
       .substring(1);
   } else {
-    return crypto.randomBytes(defaultPasswordLength / 2).toString('hex');
+    return crypto.randomBytes(defaultPasswordLength / 2).toString("hex");
   }
 }
 
