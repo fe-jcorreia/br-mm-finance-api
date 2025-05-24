@@ -1,6 +1,6 @@
 import * as crypto from 'node:crypto';
 
-import { InternalServerError } from '@core/error';
+import { InternalServerError } from '@core/error/generic';
 
 const SCRYPT_COST = process.env.NODE_ENV === 'development' ? 2 : 16384;
 

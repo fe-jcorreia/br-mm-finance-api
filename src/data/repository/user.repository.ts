@@ -1,5 +1,6 @@
 import { CryptoService } from "@core/security";
-import { ConflictError } from "@core/error";
+import { ConflictError } from "@core/error/generic";
+import { UserErrors } from "@domain/user";
 import { dbClient } from "@data/orm";
 import {
   User,
@@ -32,10 +33,7 @@ export class UserRepository {
       });
     } catch (error) {
       if (error.code === UNIQUE_CONSTRAINT_ERROR) {
-        throw new ConflictError({
-          code: "USR_01",
-          message: "users.error.existing-email",
-        });
+        throw new ConflictError(UserErrors.AlreadyRegistered);
       }
 
       throw error;

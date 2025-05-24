@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { container } from "tsyringe";
 
 import { UserCreateController } from "@api/controller";
-import { asyncErrorHandler } from "@core/error";
+import { asyncErrorHandler } from "@core/error/generic";
 
 export const authRoute = express.Router();
 

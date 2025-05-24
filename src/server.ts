@@ -4,7 +4,7 @@ import { Env } from "@env";
 import "./container-registry";
 
 import { authRoute } from "@api";
-import { parseGlobalError } from "@core/error";
+import { parseGlobalError } from "@core/error/generic";
 import { CryptoService, JwtService } from "@core/security";
 
 const app = express();
