@@ -3,12 +3,10 @@ import express from "express";
 import { Env } from "@env";
 import "./container-registry";
 
-import { userRoute } from "@api";
+import { userRoute, authenticationRoute } from "@api";
 import { CryptoService, JwtService } from "@core/security";
 import { parseGlobalError } from "@core/error";
-import { ContextProvider } from "@core/context";
-import { ServerContext } from "@core/context/context.model";
-import { JwtPayload } from "jsonwebtoken";
+import { ContextMiddleware } from "@api/middleware";
 
 const app = express();
 
@@ -20,21 +18,9 @@ JwtService.configure({
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  const authToken = req.headers.authorization;
-  let userId: string | undefined;
+app.use(ContextMiddleware);
 
-  if (authToken) {
-    const decodedToken = JwtService.verify<JwtPayload>(authToken);
-    userId = decodedToken?.data?.id;
-  }
-
-  const context: ServerContext = { uuid: crypto.randomUUID(), userId };
-  ContextProvider.getInstance<ServerContext>().enterWith(context);
-
-  next();
-});
-
+app.use(authenticationRoute);
 app.use("/user", userRoute);
 
 app.use(parseGlobalError);

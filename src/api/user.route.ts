@@ -3,6 +3,7 @@ import { container } from "tsyringe";
 
 import { UserCreateController } from "@api/controller/user";
 import { asyncErrorHandler } from "@core/error";
+import { AuthorizationMiddleware } from "@api/middleware";
 
 export const userRoute = express.Router();
 
@@ -13,6 +14,10 @@ userRoute.post(
   )
 );
 
-userRoute.get("/me", async (req: Request, res: Response) => {
-  res.send({ message: "Selected" });
-});
+userRoute.get(
+  "/me",
+  AuthorizationMiddleware,
+  async (req: Request, res: Response) => {
+    res.send({ message: "Selected" });
+  }
+);

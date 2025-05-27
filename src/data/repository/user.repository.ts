@@ -32,13 +32,13 @@ export class UserRepository {
     }
   }
 
-  async findOneByEmail(email: string): Promise<User | null> {
+  async findOneByEmail(email: string): Promise<UserWithCredentials | null> {
     return await dbClient.user.findUnique({
       where: { email, deletedAt: null },
     });
   }
 
-  async findOneById(id: string): Promise<User | null> {
+  async findOneById(id: string): Promise<UserWithCredentials | null> {
     return await dbClient.user.findUnique({
       where: { id, deletedAt: null },
     });
