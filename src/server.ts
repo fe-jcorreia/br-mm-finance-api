@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use(ContextMiddleware);
 
-app.use(authenticationRoute);
+app.use("/auth", authenticationRoute);
 app.use("/user", userRoute);
 
 app.use(parseGlobalError);

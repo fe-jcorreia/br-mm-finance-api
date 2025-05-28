@@ -7,7 +7,7 @@ import { AuthenticationController } from "@api/controller/auth";
 export const authenticationRoute = express.Router();
 
 authenticationRoute.post(
-  "/auth",
+  "/",
   asyncErrorHandler((req: Request, res: Response) =>
     container.resolve(AuthenticationController).handle(req, res)
   )

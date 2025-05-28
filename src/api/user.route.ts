@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { UserCreateController } from "@api/controller/user";
+import { UserController, UserCreateController } from "@api/controller/user";
 import { asyncErrorHandler } from "@core/error";
 import { AuthorizationMiddleware } from "@api/middleware";
 
@@ -17,7 +17,7 @@ userRoute.post(
 userRoute.get(
   "/me",
   AuthorizationMiddleware,
-  async (req: Request, res: Response) => {
-    res.send({ message: "Selected" });
-  }
+  asyncErrorHandler((req: Request, res: Response) => {
+    container.resolve(UserController).handle(req, res);
+  })
 );
