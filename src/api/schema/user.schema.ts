@@ -24,7 +24,7 @@ export const userCreationSchema = userSchema.omit({ id: true }).extend({
   password: z.string().refine(isValidPassword, "users.error.invalid-password"),
 }) satisfies ZodType<UserCreationInput>;
 
-export const updateUserInputSchema = userCreationSchema
+export const userUpdateSchema = userCreationSchema
   .omit({ email: true })
   .extend({ oldPassword: z.string() })
   .partial() satisfies ZodType<UserUpdateInput>;

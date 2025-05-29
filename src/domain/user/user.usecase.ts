@@ -4,7 +4,7 @@ import { NotFoundError } from "@core/error/generic";
 import { AuthenticatedContext, ContextProvider } from "@core/context";
 import { UserErrors } from "@domain/user";
 import { UserRepository } from "@data/repository";
-import { User } from "@model";
+import { UserWithCredentials } from "@model";
 
 @injectable()
 export class UserUseCase {
@@ -12,7 +12,7 @@ export class UserUseCase {
     @inject("UserRepository") private readonly userRepository: UserRepository
   ) {}
 
-  async exec(): Promise<User> {
+  async exec(): Promise<UserWithCredentials> {
     const userId = ContextProvider.getInstance<AuthenticatedContext>().get().userId;
     const user = await this.userRepository.findOneById(userId);
 
