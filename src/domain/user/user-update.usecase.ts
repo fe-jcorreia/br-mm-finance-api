@@ -9,14 +9,16 @@ import { InvalidDataError } from "@core/error/generic";
 @injectable()
 export class UserUpdateUseCase {
   constructor(
-    @inject("UserUseCase") private readonly userUseCase: UserUseCase,
-    @inject("UserRepository") private readonly userRepository: UserRepository
+    @inject("UserUseCase")
+    private readonly userUseCase: UserUseCase,
+    @inject("UserRepository")
+    private readonly userRepository: UserRepository
   ) {}
 
   async exec(input: UserUpdateInput): Promise<User> {
     const user = await this.userUseCase.exec();
 
-    let password;
+    let password: string | undefined;
     if (input.password) {
       await this.checkOldPassword(user, input);
       password = await CryptoService.generateHashWithSalt(input.password, user.salt);

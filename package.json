@@ -1,40 +1,42 @@
 {
-  "name": "br-mm-finance-api",
-  "version": "1.0.0",
-  "description": "Api for finance control",
-  "author": "fe-jcorreia",
-  "license": "ISC",
-  "main": "index.js",
-  "scripts": {
-    "migration:generate": "prisma migrate dev --name",
-    "migration:run": "prisma migrate dev",
-    "dev": "tsx watch src/server.ts",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "@prisma/client": "6.8.2",
-    "dotenv": "16.5.0",
-    "express": "5.1.0",
-    "jsonwebtoken": "9.0.2",
-    "reflect-metadata": "0.2.2",
-    "tsyringe": "4.10.0",
-    "zod": "3.25.20"
-  },
-  "devDependencies": {
-    "@types/express": "5.0.2",
-    "@types/jsonwebtoken": "9.0.7",
-    "@types/node": "22.15.21",
-    "eslint": "9.27.0",
-    "prisma": "6.8.2",
-    "tsx": "4.19.4",
-    "typescript": "5.8.3"
-  },
-  "engines": {
-    "node": "22.x.x",
-    "npm": "11.3.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fe-jcorreia/br-mm-finance-api"
-  }
+	"name": "br-mm-finance-api",
+	"version": "1.0.0",
+	"description": "Api for finance control",
+	"author": "fe-jcorreia",
+	"license": "ISC",
+	"main": "index.js",
+	"scripts": {
+		"migration:generate": "prisma migrate dev --name",
+		"migration:run": "prisma migrate dev",
+		"dev": "tsx watch src/server.ts",
+		"start": "node server.js",
+    "lint": "biome lint ."
+	},
+	"dependencies": {
+		"@prisma/client": "6.8.2",
+		"dotenv": "16.5.0",
+		"express": "5.1.0",
+		"jsonwebtoken": "9.0.2",
+		"reflect-metadata": "0.2.2",
+		"tsyringe": "4.10.0",
+		"zod": "3.25.20"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/express": "5.0.2",
+		"@types/jsonwebtoken": "9.0.7",
+		"@types/node": "22.15.21",
+		"eslint": "9.27.0",
+		"prisma": "6.8.2",
+		"tsx": "4.19.4",
+		"typescript": "5.8.3"
+	},
+	"engines": {
+		"node": "22.x.x",
+		"npm": "11.4.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fe-jcorreia/br-mm-finance-api"
+	}
 }

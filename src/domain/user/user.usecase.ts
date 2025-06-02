@@ -9,7 +9,8 @@ import { UserWithCredentials } from "@model";
 @injectable()
 export class UserUseCase {
   constructor(
-    @inject("UserRepository") private readonly userRepository: UserRepository
+    @inject("UserRepository")
+    private readonly userRepository: UserRepository
   ) {}
 
   async exec(): Promise<UserWithCredentials> {
