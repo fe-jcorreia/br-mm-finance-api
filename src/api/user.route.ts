@@ -21,15 +21,15 @@ userRoute.post(
 userRoute.get(
   "/me",
   AuthorizationMiddleware,
-  asyncErrorHandler((req: Request, res: Response) => {
-    container.resolve(UserController).handle(req, res);
-  })
+  asyncErrorHandler((req: Request, res: Response) =>
+    container.resolve(UserController).handle(req, res)
+  )
 );
 
 userRoute.patch(
   "/update",
   AuthorizationMiddleware,
-  asyncErrorHandler((req: Request, res: Response) => {
-    container.resolve(UserUpdateController).handle(req, res);
-  })
+  asyncErrorHandler((req: Request, res: Response) =>
+    container.resolve(UserUpdateController).handle(req, res)
+  )
 );

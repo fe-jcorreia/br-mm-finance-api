@@ -18,7 +18,7 @@ export class UserUpdateUseCase {
 
     let password;
     if (input.password) {
-      this.checkOldPassword(user, input);
+      await this.checkOldPassword(user, input);
       password = await CryptoService.generateHashWithSalt(input.password, user.salt);
     }
 

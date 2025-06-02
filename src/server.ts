@@ -11,13 +11,9 @@ import { ContextMiddleware } from "@api/middleware";
 const app = express();
 
 CryptoService.configure(Env.CRYPTO_SALT);
-JwtService.configure({
-  expiration: Env.JWT_EXPIRATION,
-  secret: Env.JWT_SECRET,
-});
+JwtService.configure({ expiration: Env.JWT_EXPIRATION, secret: Env.JWT_SECRET });
 
 app.use(express.json());
-
 app.use(ContextMiddleware);
 
 app.use("/auth", authenticationRoute);

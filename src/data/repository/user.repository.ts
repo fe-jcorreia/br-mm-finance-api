@@ -14,15 +14,10 @@ const UNIQUE_CONSTRAINT_ERROR = "P2002";
 export class UserRepository {
   async insert(input: UserCreationInput): Promise<User> {
     const salt = CryptoService.generateRandomPassword();
-    const hashedPassword = await CryptoService.generateHashWithSalt(
-      input.password,
-      salt
-    );
+    const hashedPassword = await CryptoService.generateHashWithSalt(input.password, salt);
 
     try {
-      return await dbClient.user.create({
-        data: { ...input, salt, password: hashedPassword },
-      });
+      return await dbClient.user.create({ data: { ...input, salt, password: hashedPassword } });
     } catch (error) {
       if (error.code === UNIQUE_CONSTRAINT_ERROR) {
         throw new ConflictError(UserErrors.AlreadyRegistered);
@@ -55,18 +50,9 @@ export class UserRepository {
     return dbClient.user.update({
       where: { id: input.id },
       data: {
-        email: await CryptoService.generateHashWithSalt(
-          input.email,
-          input.salt
-        ),
-        firstName: await CryptoService.generateHashWithSalt(
-          input.email,
-          input.salt
-        ),
-        lastName: await CryptoService.generateHashWithSalt(
-          input.email,
-          input.salt
-        ),
+        email: await CryptoService.generateHashWithSalt(input.email, input.salt),
+        firstName: await CryptoService.generateHashWithSalt(input.email, input.salt),
+        lastName: await CryptoService.generateHashWithSalt(input.email, input.salt),
         password: null,
         deletedAt: new Date(),
       },
