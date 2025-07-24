@@ -1,10 +1,9 @@
-import { container } from "tsyringe";
-
-import { UserController, UserCreateController, UserUpdateController } from "@api/controller/user";
 import { AuthenticationController } from "@api/controller/auth";
-import { UserCreateUseCase, UserUpdateUseCase, UserUseCase } from "@domain/user";
-import { AuthenticationUseCase } from "@domain/auth";
+import { UserController, UserCreateController, UserUpdateController } from "@api/controller/user";
 import { UserRepository } from "@data/repository";
+import { AuthenticationUseCase } from "@domain/auth";
+import { UserCreateUseCase, UserUpdateUseCase, UserUseCase } from "@domain/user";
+import { container } from "tsyringe";
 
 // User
 container.registerSingleton("UserCreateController", UserCreateController);

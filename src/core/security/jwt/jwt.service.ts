@@ -30,6 +30,7 @@ function decode<T>(token: string): JwtToken<T> | null {
     const splitToken = token.replace(BEARER, "");
     return decodeJwt(splitToken) as JwtToken<T>;
   } catch (err) {
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
     console.log("Invalid JWT token (verify): ", err.message);
     return null;
   }
@@ -48,6 +49,7 @@ function verify<T>(
       secretOrPublicKey ? secretOrPublicKey : secret
     ) as JwtToken<T>;
   } catch (err) {
+    // biome-ignore lint/suspicious/noConsoleLog: <explanation>
     console.log("Invalid JWT token (verify): ", err.message);
     return null;
   }

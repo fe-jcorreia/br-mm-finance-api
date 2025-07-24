@@ -10,7 +10,7 @@
 		"migration:run": "prisma migrate dev",
 		"dev": "tsx watch src/server.ts",
 		"start": "node server.js",
-    "lint": "biome lint ."
+		"lint": "biome lint ."
 	},
 	"dependencies": {
 		"@prisma/client": "6.8.2",
@@ -22,7 +22,7 @@
 		"zod": "3.25.20"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
+		"@biomejs/biome": "2.1.2",
 		"@types/express": "5.0.2",
 		"@types/jsonwebtoken": "9.0.7",
 		"@types/node": "22.15.21",
@@ -33,7 +33,7 @@
 	},
 	"engines": {
 		"node": "22.x.x",
-		"npm": "11.4.1"
+		"npm": "11.4.2"
 	},
 	"repository": {
 		"type": "git",

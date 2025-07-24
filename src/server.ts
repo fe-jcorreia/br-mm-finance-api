@@ -1,12 +1,12 @@
 import "reflect-metadata";
-import express from "express";
 import { Env } from "@env";
+import express from "express";
 import "./container-registry";
 
-import { userRoute, authenticationRoute } from "@api";
-import { CryptoService, JwtService } from "@core/security";
-import { parseGlobalError } from "@core/error";
+import { authenticationRoute, userRoute } from "@api";
 import { ContextMiddleware } from "@api/middleware";
+import { parseGlobalError } from "@core/error";
+import { CryptoService, JwtService } from "@core/security";
 
 const app = express();
 
@@ -22,5 +22,6 @@ app.use("/user", userRoute);
 app.use(parseGlobalError);
 
 app.listen(Env.PORT, () => {
-  console.log(`Server running on PORT ${Env.PORT}`);
+	// biome-ignore lint/suspicious/noConsole: server startup
+	console.log(`Server running on PORT ${Env.PORT}`);
 });
