@@ -12,6 +12,15 @@ userRoute.post(
 	asyncErrorHandler((req: Request, res: Response) => container.resolve(UserCreateController).handle(req, res)),
 );
 
+/**
+ * @openapi
+ * /user/me:
+ *   get:
+ *     description: Get authenticated user information
+ *     responses:
+ *       200:
+ *         description: Returns a User
+ */
 userRoute.get(
 	"/me",
 	AuthorizationMiddleware,
