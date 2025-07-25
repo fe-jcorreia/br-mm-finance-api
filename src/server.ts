@@ -1,12 +1,27 @@
-import { Env } from "@src/env";
+import "reflect-metadata";
+import "./container-registry";
 import express from "express";
-import { authRoute } from "./api/auth.route";
+
+import { authenticationRoute, userRoute } from "@/api";
+import { ContextMiddleware } from "@/api/middleware";
+import { parseGlobalError } from "@/core/error";
+import { CryptoService, JwtService } from "@/core/security";
+import { Env } from "@/env";
 
 const app = express();
 
-app.use(authRoute)
+CryptoService.configure(Env.CRYPTO_SALT);
+JwtService.configure({ expiration: Env.JWT_EXPIRATION, secret: Env.JWT_SECRET });
 
+app.use(express.json());
+app.use(ContextMiddleware);
+
+app.use("/auth", authenticationRoute);
+app.use("/user", userRoute);
+
+app.use(parseGlobalError);
 
 app.listen(Env.PORT, () => {
-  console.log(`Server running on PORT ${Env.PORT}`);
+	// biome-ignore lint/suspicious/noConsole: server startup
+	console.log(`Server running on PORT ${Env.PORT}`);
 });

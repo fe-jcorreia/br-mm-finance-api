@@ -1,0 +1,78 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							":NODE:",
+							":PACKAGE:",
+							":PACKAGE_WITH_PROTOCOL:",
+							":BLANK_LINE:",
+							":ALIAS:",
+							":BLANK_LINE:",
+							":PATH:"
+						]
+					}
+				}
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"lineWidth": 120,
+		"lineEnding": "lf",
+		"attributePosition": "multiline",
+		"bracketSpacing": true
+	},
+	"linter": {
+		"rules": {
+			"complexity": {
+				"noUselessTypeConstraint": "off",
+				"noForEach": "off",
+				"noStaticOnlyClass": "off",
+				"noExtraBooleanCast": "off",
+				"noBannedTypes": "warn"
+			},
+			"suspicious": {
+				"noConsole": "warn",
+				"noExplicitAny": "off",
+				"noArrayIndexKey": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "off",
+				"useImportType": "off",
+				"noImplicitBoolean": "off",
+				"noParameterAssign": "off",
+				"noUselessElse": "off"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "warn",
+				"useHookAtTopLevel": "error",
+				"noUnusedImports": "error",
+				"noUnusedVariables": "error"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"bracketSameLine": true,
+			"bracketSpacing": true,
+			"trailingCommas": "all",
+			"arrowParentheses": "asNeeded"
+		},
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		}
+	}
+}
