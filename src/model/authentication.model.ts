@@ -1,12 +1,12 @@
 export interface AuthenticationInput {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 }
 
 export interface Authentication {
-  token: string;
+	token: string;
 }
 
 export interface JwtPayload {
-  id: string;
+	id: string;
 }

@@ -1,9 +1,10 @@
-import { InvalidDataError } from "@core/error/generic";
-import { CryptoService } from "@core/security";
-import { UserRepository } from "@data/repository";
-import { UserErrors, UserUseCase } from "@domain/user";
-import { User, UserUpdateInput, UserWithCredentials } from "@model";
 import { inject, injectable } from "tsyringe";
+
+import { InvalidDataError } from "@/core/error/generic";
+import { CryptoService } from "@/core/security";
+import { UserRepository } from "@/data/repository";
+import { UserErrors, UserUseCase } from "@/domain/user";
+import { User, UserUpdateInput, UserWithCredentials } from "@/model";
 
 @injectable()
 export class UserUpdateUseCase {
@@ -23,6 +24,7 @@ export class UserUpdateUseCase {
 			password = await CryptoService.generateHashWithSalt(input.password, user.salt);
 		}
 
+		// biome-ignore lint/correctness/noUnusedVariables: excluding old password from input
 		const { oldPassword, ...validFieldsToUpdate } = input;
 		const patchedUser = await this.userRepository.update(user.id, { ...validFieldsToUpdate, password });
 

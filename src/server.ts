@@ -1,12 +1,12 @@
 import "reflect-metadata";
-import { Env } from "@env";
-import express from "express";
 import "./container-registry";
+import express from "express";
 
-import { authenticationRoute, userRoute } from "@api";
-import { ContextMiddleware } from "@api/middleware";
-import { parseGlobalError } from "@core/error";
-import { CryptoService, JwtService } from "@core/security";
+import { authenticationRoute, userRoute } from "@/api";
+import { ContextMiddleware } from "@/api/middleware";
+import { parseGlobalError } from "@/core/error";
+import { CryptoService, JwtService } from "@/core/security";
+import { Env } from "@/env";
 
 const app = express();
 

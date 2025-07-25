@@ -1,12 +1,9 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
 	"vcs": {
-		"enabled": false,
+		"enabled": true,
 		"clientKind": "git",
-		"useIgnoreFile": false
-	},
-	"files": {
-		"includes": ["**", "!**/node_modules/*"]
+		"useIgnoreFile": true
 	},
 	"assist": {
 		"actions": {
@@ -14,7 +11,15 @@
 				"organizeImports": {
 					"level": "on",
 					"options": {
-						"groups": [[":NODE:", ":PACKAGE:"], ":BLANK_LINE:", [":ALIAS:", ":PATH:"]]
+						"groups": [
+							":NODE:",
+							":PACKAGE:",
+							":PACKAGE_WITH_PROTOCOL:",
+							":BLANK_LINE:",
+							":ALIAS:",
+							":BLANK_LINE:",
+							":PATH:"
+						]
 					}
 				}
 			}

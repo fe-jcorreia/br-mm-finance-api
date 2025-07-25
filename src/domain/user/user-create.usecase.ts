@@ -1,6 +1,7 @@
-import { UserRepository } from "@data/repository";
-import { User, UserCreationInput } from "@model";
 import { inject, injectable } from "tsyringe";
+
+import { UserRepository } from "@/data/repository";
+import { User, UserCreationInput } from "@/model";
 
 @injectable()
 export class UserCreateUseCase {
